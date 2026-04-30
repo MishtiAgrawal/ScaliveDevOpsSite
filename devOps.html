@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scalive DevOps Platform - Master DevOps in 2026!</title>
+<style>
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0f172a 100%);
+    color:#e2e8f0;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background: rgba(11,15,29,0.95);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(34,197,94,0.2);
+}
+
+.logo {
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-icon {
+    width:50px;
+    height:50px;
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.5rem;
+    box-shadow: 0 10px 30px rgba(16,185,129,0.4);
+}
+
+nav a {
+    margin:0 25px;
+    color:#94a3b8;
+    text-decoration:none;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: #10b981;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    padding:14px 30px;
+    border:none;
+    border-radius:12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(16,185,129,0.4);
+}
+
+/* HERO */
+.hero {
+    text-align:center;
+    padding:160px 40px 120px;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(16,185,129,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(59,130,246,0.1) 0%, transparent 50%),
+        linear-gradient(135deg, rgba(11,15,29,0.9), rgba(15,23,42,0.9));
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(16,185,129,0.1)"/><circle cx="75" cy="75" r="0.5" fill="rgba(59,130,246,0.1)"/><circle cx="50" cy="10" r="0.8" fill="rgba(16,185,129,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    pointer-events: none;
+}
+
+.hero h1 { 
+    font-size: clamp(3rem, 6vw, 5rem);
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.hero p {
+    font-size: 1.35rem;
+    margin-bottom: 40px;
+    opacity: 0.85;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    background: rgba(16,185,129,0.2);
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: 1px solid rgba(16,185,129,0.3);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.hero-btns button {
+    padding:20px 45px;
+    border-radius:25px;
+    border:none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.primary {
+    background: linear-gradient(135deg, #10b981, #059669);
+    box-shadow: 0 20px 50px rgba(16,185,129,0.4);
+}
+
+.primary:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 30px 60px rgba(16,185,129,0.5);
+}
+
+.secondary {
+    background: rgba(15,23,42,0.8);
+    border: 2px solid #475569;
+    color: #e2e8f0;
+    backdrop-filter: blur(10px);
+}
+
+.secondary:hover {
+    background: rgba(16,185,129,0.15);
+    border-color: #10b981;
+    color: #10b981;
+}
+
+/* STATS */
+.stats {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    padding:80px 60px;
+    text-align: center;
+    background: rgba(15,23,42,0.5);
+    border-top: 1px solid rgba(16,185,129,0.2);
+    border-bottom: 1px solid rgba(16,185,129,0.2);
+}
+
+.stat-item {
+    position: relative;
+}
+
+.stat-item::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    border-radius: 50%;
+    opacity: 0.2;
+}
+
+.stat-item h2 {
+    font-size: 4rem;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.stat-item p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+/* WHAT IS DEVOPS SECTION */
+.devops-explained {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.devops-explained h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.devops-intro {
+    text-align: center;
+    font-size: 1.3rem;
+    opacity: 0.9;
+    max-width: 900px;
+    margin: 0 auto 60px;
+    line-height: 1.8;
+}
+
+.devops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.devops-card {
+    background: rgba(15,23,42,0.8);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(16,185,129,0.2);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.devops-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
+}
+
+.devops-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 60px rgba(16,185,129,0.25);
+    border-color: #10b981;
+}
+
+.devops-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 15px 40px rgba(16,185,129,0.3);
+}
+
+.devops-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #f8fafc;
+    font-weight: 700;
+}
+
+/* ROADMAP */
+#roadmap {
+    padding: 100px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+#roadmap h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.roadmap-intro {
+    text-align: center;
+    opacity: 0.9;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    font-size: 1.25rem;
+}
+
+/* Interactive Timeline */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background: linear-gradient(to bottom, #10b981, #34d399, #6ee7b7);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    box-shadow: 0 0 20px rgba(16,185,129,0.5);
+    border-radius: 3px;
+}
+
+.step {
+    padding: 35px 50px;
+    position: relative;
+    background: rgba(15,23,42,0.9);
+    width: 48%;
+    margin: 50px 0;
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(16,185,129,0.2);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.step:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(16,185,129,0.3);
+    border-color: #10b981;
+}
+
+.step::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    border: 4px solid #0f172a;
+    border-radius: 50%;
+    top: 35px;
+    box-shadow: 0 0 20px rgba(16,185,129,0.7);
+    z-index: 2;
+}
+
+.left { left: 0; }
+.right { left: 52%; }
+
+.left::after {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 42px;
+    width: 0;
+    right: -18px;
+    border: 15px solid transparent;
+    border-left-color: rgba(15,23,42,0.9);
+}
+
+.right::after {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 42px;
+    width: 0;
+    left: -18px;
+    border: 15px solid transparent;
+    border-right-color: rgba(15,23,42,0.9);
+}
+
+.step h3 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+.step p {
+    opacity: 0.9;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* GRID */
+.grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap:40px;
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 0 60px;
+}
+
+/* CARD */
+.card {
+    background: rgba(15,23,42,0.9);
+    padding:40px 30px;
+    border-radius:24px;
+    text-align:center;
+    transition:all 0.4s ease;
+    border: 1px solid rgba(16,185,129,0.2);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
+}
+
+.card-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 25px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 15px 40px rgba(16,185,129,0.3);
+}
+
+.card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 35px 70px rgba(16,185,129,0.25);
+    border-color: #10b981;
+}
+
+.card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    color: #f8fafc;
+}
+
+.card p {
+    opacity: 0.9;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+/* SECTION HEADERS */
+section {
+    padding: 100px 60px;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* CTA */
+.cta {
+    text-align:center;
+    padding:120px 60px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+    margin: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.cta h2 {
+    font-size: 3.2rem;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.cta p {
+    font-size: 1.4rem;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    position: relative;
+    z-index: 2;
+}
+
+.cta .primary {
+    padding:25px 60px;
+    font-size: 1.4rem;
+    border-radius: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+/* FOOTER */
+footer {
+    text-align:center;
+    padding:50px 60px;
+    background:rgba(11,15,29,0.95);
+    border-top: 1px solid rgba(16,185,129,0.3);
+}
+
+.footer-links a {
+    color: #10b981;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+    .navbar { padding:20px 40px; }
+    .grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); padding:0 40px; }
+}
+
+@media(max-width:768px){
+    .navbar { padding:15px 20px; flex-direction: column; gap:20px; }
+    .hero { padding:120px 20px 80px; }
+    .hero-btns { flex-direction: column; align-items: center; gap:20px; }
+    .stats { grid-template-columns: repeat(2, 1fr); padding:60px 20px; gap:30px; }
+    .timeline::after { left: 35px; }
+    .step {
+        width: calc(100% - 80px);
+        left: 70px !important;
+        padding: 25px 30px;
+    }
+    .step::before { left: 20px; }
+    .left::after, .right::after { 
+        left: 25px; 
+        border-color: transparent transparent transparent rgba(15,23,42,0.9) !important; 
+        border-width: 12px 0 12px 12px;
+    }
+    .grid { grid-template-columns: 1fr; padding:0 20px; gap:30px; }
+    section { padding:80px 20px; }
+    .devops-grid { grid-template-columns: 1fr; }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(16,185,129,0.5); }
+    50% { box-shadow: 0 0 40px rgba(16,185,129,0.8); }
+}
+
+.step:hover::before, .card:hover::before, .devops-card:hover::before {
+    animation: glow 1.5s infinite;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="logo">
+        <img class="logo-icon" src="logo (1).png"></img>
+        <span>Scalive DevOps</span>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#devops">What is DevOps?</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#tools">Tools</a>
+        <a href="#projects">Projects</a>
+    </nav>
+
+    <button class="btn">Start Free Trial</button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <h1>Master DevOps in 2026 🚀</h1>
+    <p class="hero-subtitle">From Zero to DevOps Engineer in 6 Months</p>
+    <p>Build production-ready systems. Deploy to AWS, Kubernetes & Docker. Get job-ready with 20+ real projects & interview prep.</p>
+    
+    <div class="hero-stats">
+        <div class="stat-badge">10K+ Students</div>
+        <div class="stat-badge">95% Placement</div>
+        <div class="stat-badge">20+ Projects</div>
+    </div>
+    
+    <div class="hero-btns">
+        <button class="primary">Start Learning Free</button>
+        <button class="secondary">Watch Demo →</button>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="stat-item">
+        <h2>10K+</h2>
+        <p>Students Trained & Placed</p>
+    </div>
+    <div class="stat-item">
+        <h2>50+</h2>
+        <p>Interactive Lessons</p>
+    </div>
+    <div class="stat-item">
+        <h2>20+</h2>
+        <p>Production Projects</p>
+    </div>
+    <div class="stat-item">
+        <h2>95%</h2>
+        <p>Job Success Rate</p>
+    </div>
+</section>
+
+<!-- WHAT IS DEVOPS -->
+<section class="devops-explained" id="devops">
+    <h2>DevOps Explained Simply</h2>
+    <p class="devops-intro">
+        DevOps = Development + Operations. It's how modern companies build & run software faster, safer, and cheaper.
+        <br><strong>Think of it as: Developers + Ops teams working together with automation!</strong>
+    </p>
+    
+    <div class="devops-grid">
+        <div class="devops-card">
+            <div class="devops-icon">⚙️</div>
+            <h3>Before DevOps (Chaos)</h3>
+            <p>Dev team throws code over the wall. Ops team manually deploys. Everything breaks in production. Weeks of firefighting.</p>
+        </div>
+        <div class="devops-card">
+            <div class="devops-icon">🚀</div>
+            <h3>With DevOps (Magic)</h3>
+            <p>Code → Automated tests → Docker → Kubernetes → Production in 5 minutes. Zero downtime. Everyone sleeps at night.</p>
+        </div>
+        <div class="devops-card">
+            <div class="devops-icon">💰</div>
+            <h3>Why Companies Pay $150K+</h3>
+            <p>DevOps Engineers save companies millions by automating chaos into reliable systems that scale automatically.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+    <h2>6-Month DevOps Mastery Roadmap</h2>
+    <p class="roadmap-intro">Each phase = 20-30 hours of hands-on practice. Real servers, real code, real projects. No fluff.</p>
+
+    <div class="timeline">
+        <div class="step left">
+            <h3>Phase 1: Linux Mastery</h3>
+            <p>Commands, SSH, permissions, processes. Practice on Ubuntu servers. <strong>Build your first Linux automation script.</strong></p>
+        </div>
+        <div class="step right">
+            <h3>Phase 2: Git & Collaboration</h3>
+            <p>Branching, PRs, GitHub Actions. <strong>Create production Git workflow used by 100+ engineers.</strong></p>
+        </div>
+        <div class="step left">
+            <h3>Phase 3: CI/CD Pipelines</h3>
+            <p>Jenkins + GitHub Actions. <strong>Automate: test → build → deploy. Zero manual work.</strong></p>
+        </div>
+        <div class="step right">
+            <h3>Phase 4: Docker Deep Dive</h3>
+            <p>Containers, images, Compose, multi-stage builds. <strong>Containerize Node.js + React app.</strong></p>
+        </div>
+        <div class="step left">
+            <h3>Phase 5: Kubernetes Production</h3>
+            <p>Pods, Deployments, Services, Helm. <strong>Deploy scalable microservices cluster.</strong></p>
+        </div>
+        <div class="step right">
+            <h3>Phase 6: Cloud + Monitoring</h3>
+            <p>AWS EKS + Terraform + Prometheus. <strong>Production-grade infrastructure that scales automatically.</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- TOOLS -->
+<section id="tools">
+    <h2>Tools Every DevOps Engineer Masters</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-icon">🐳</div>
+            <h3>Docker</h3>
+            <p>Package apps + dependencies. Run anywhere consistently. <strong>No more "works on my machine" problems.</strong></p>
+        </div>
+        <div class="card">
+            <div class="card-icon">☸️</div>
+            <h3>Kubernetes</h3>
+            <p>Orchestrate 1000s of containers. Auto-scale, self-heal, zero-downtime deploys.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">⚙️</div>
+            <h3>Jenkins</h3>
+            <p>CI/CD automation. 100+ plugins. Build → test → deploy with one Git push.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3>AWS</h3>
+            <p>Cloud infrastructure. EC2, EKS, RDS, S3. Real production deployments.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📝</div>
+            <h3>Terraform</h3>
+            <p>Infrastructure as Code. Version-controlled cloud infra. Multi-cloud support.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📊</div>
+            <h3>Prometheus + Grafana</h3>
+            <p>Monitor everything. Alerts, dashboards, traces. Know before production breaks.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <h2>20+ Production Projects</h2>
+    <p style="text-align:center; opacity:0.9; max-width:900px; margin:0 auto 60px; font-size:1.2rem;">
+        Each project = complete source code + video walkthrough + production deployment + interview questions.
+    </p>
+    <div class="grid">
+        <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>Full CI/CD Pipeline</h3>
+            <p>Jenkins + Docker + K8s. Git push → production in 3 minutes.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🏗️</div>
+            <h3>Multi-Container App</h3>
+            <p>React + Node + MongoDB + Redis with Docker Compose & auto-scaling.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🌐</div>
+            <h3>K8s Microservices</h3>
+            <p>5 services + service mesh + ingress + horizontal pod autoscaling.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3>AWS EKS Cluster</h3>
+            <p>Terraform + EKS + ALB + CloudWatch. Production-ready architecture.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🔄</div>
+            <h3>GitOps with ArgoCD</h3>
+            <p>Git commit → automatic K8s deployment. Zero manual kubectl.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📈</div>
+            <h3>Observability Stack</h3>
+            <p>Prometheus + Grafana + Loki. Custom dashboards for every metric.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <h2>Start Your DevOps Journey Today!</h2>
+    <p>Join 10K+ students placed at Google, Amazon, startups & enterprises</p>
+    <button class="primary">Start Free Trial → No Credit Card</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Scalive DevOps Platform | <span class="footer-links">
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms</a> | 
+        <a href="#">Contact</a>
+    </span></p>
+</footer>
+
+</body>
+</html>
